@@ -1,0 +1,18 @@
+#!/bin/sh
+# set  trap for signal 15, which kills the process group
+PGID=$$
+echo "Running process group $PGID"
+trap "kill -SIGTERM -$PGID" EXIT
+
+# fake commands
+sleep 1d &
+sleep 1d &
+sleep 1d &
+sleep 1d &
+sleep 1d &
+sleep 1d &
+sleep 1d &
+sleep 1d &
+
+# run the main process
+exec "${@}"
